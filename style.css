@@ -1,16 +1,13 @@
-/* Delhi Voices - Professional Theme */
-/* Colors inspired by Delhi: Saffron, White, Green */
+/* Nemo's Articles - Professional Theme */
 
 :root {
-    --saffron: #FF9933;
+    --primary: #2563EB;
+    --secondary: #7C3AED;
+    --dark: #1E293B;
+    --light: #F8FAFC;
+    --gray: #64748B;
+    --border: #E2E8F0;
     --white: #FFFFFF;
-    --green: #138808;
-    --navy: #1A2A6C;
-    --charcoal: #2C3E50;
-    --light-gray: #F5F5F5;
-    --border: #E0E0E0;
-    --text-dark: #1A1A1A;
-    --text-light: #666666;
     --shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
@@ -21,16 +18,16 @@
 }
 
 body {
-    font-family: 'Segoe UI', 'Poppins', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    color: var(--text-dark);
+    color: var(--dark);
     background: var(--white);
 }
 
-/* Header & Navigation */
+/* Header */
 .site-header {
     background: var(--white);
-    border-bottom: 3px solid var(--saffron);
+    border-bottom: 3px solid var(--primary);
     box-shadow: var(--shadow);
     position: sticky;
     top: 0;
@@ -54,17 +51,10 @@ body {
     font-size: 1.8rem;
     font-weight: 800;
     text-decoration: none;
-    background: linear-gradient(135deg, var(--saffron), var(--green));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    letter-spacing: -0.5px;
-}
-
-.logo span {
-    font-size: 0.8rem;
-    color: var(--text-light);
-    display: block;
 }
 
 .nav-links {
@@ -76,19 +66,18 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--charcoal);
+    color: var(--dark);
     font-weight: 500;
     transition: color 0.3s;
-    font-size: 1rem;
 }
 
 .nav-links a:hover {
-    color: var(--saffron);
+    color: var(--primary);
 }
 
-/* Hero Section */
+/* Hero */
 .hero {
-    background: linear-gradient(135deg, var(--navy), var(--charcoal));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     padding: 4rem 2rem;
     text-align: center;
@@ -102,20 +91,15 @@ body {
 .hero-content p {
     font-size: 1.2rem;
     max-width: 600px;
-    margin: 0 auto 1rem;
+    margin: 0 auto;
     opacity: 0.9;
 }
 
-.hero-meta {
-    font-size: 0.9rem;
-    opacity: 0.7;
-}
-
-/* Ad Containers */
+/* Ads */
 .ad-container {
     max-width: 1280px;
     margin: 2rem auto;
-    background: var(--light-gray);
+    background: var(--light);
     border: 1px dashed var(--border);
     border-radius: 8px;
     text-align: center;
@@ -124,15 +108,10 @@ body {
 
 .ad-label {
     font-size: 0.7rem;
-    color: var(--text-light);
+    color: var(--gray);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 0.5rem;
-}
-
-.ad-content {
-    font-size: 0.9rem;
-    color: var(--text-light);
 }
 
 /* Section Titles */
@@ -146,12 +125,6 @@ body {
 
 .title-icon {
     font-size: 2rem;
-}
-
-.title-line {
-    flex: 1;
-    height: 2px;
-    background: linear-gradient(90deg, var(--saffron), transparent);
 }
 
 /* Featured Grid */
@@ -174,7 +147,7 @@ body {
     padding: 1.5rem;
     box-shadow: var(--shadow);
     border: 1px solid var(--border);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s;
     position: relative;
 }
 
@@ -187,8 +160,8 @@ body {
     position: absolute;
     top: -10px;
     left: 20px;
-    background: var(--saffron);
-    color: var(--white);
+    background: var(--primary);
+    color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -197,15 +170,14 @@ body {
 
 .featured-card h3 a, .article-item h3 a {
     text-decoration: none;
-    color: var(--text-dark);
-    transition: color 0.3s;
+    color: var(--dark);
 }
 
 .featured-card h3 a:hover, .article-item h3 a:hover {
-    color: var(--saffron);
+    color: var(--primary);
 }
 
-/* Article List */
+/* Articles List */
 .articles-list {
     display: flex;
     flex-direction: column;
@@ -226,7 +198,7 @@ body {
     display: flex;
     gap: 1.5rem;
     font-size: 0.8rem;
-    color: var(--text-light);
+    color: var(--gray);
     margin-bottom: 0.75rem;
     flex-wrap: wrap;
 }
@@ -234,18 +206,14 @@ body {
 .read-more {
     display: inline-block;
     margin-top: 0.75rem;
-    color: var(--saffron);
+    color: var(--primary);
     text-decoration: none;
     font-weight: 600;
 }
 
-.read-more:hover {
-    text-decoration: underline;
-}
-
 .read-time {
     font-size: 0.75rem;
-    color: var(--text-light);
+    color: var(--gray);
     margin-left: 1rem;
 }
 
@@ -254,15 +222,10 @@ body {
     max-width: 1280px;
     margin: 3rem auto;
     padding: 2rem;
-    background: linear-gradient(135deg, var(--saffron), var(--green));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     border-radius: 16px;
     text-align: center;
     color: white;
-}
-
-.newsletter h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
 }
 
 .newsletter-form {
@@ -283,28 +246,17 @@ body {
 
 .newsletter-form button {
     padding: 0.75rem 2rem;
-    background: var(--navy);
+    background: var(--dark);
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: transform 0.2s;
-}
-
-.newsletter-form button:hover {
-    transform: scale(1.02);
-}
-
-.newsletter-note {
-    font-size: 0.7rem;
-    margin-top: 1rem;
-    opacity: 0.8;
 }
 
 /* Footer */
 .site-footer {
-    background: var(--charcoal);
+    background: var(--dark);
     color: white;
     padding: 3rem 2rem 2rem;
     margin-top: 3rem;
@@ -320,29 +272,24 @@ body {
 
 .footer-section h4 {
     margin-bottom: 1rem;
-    color: var(--saffron);
+    color: var(--primary);
 }
 
 .footer-section a {
-    color: var(--light-gray);
+    color: var(--light);
     text-decoration: none;
     display: block;
     margin-bottom: 0.5rem;
-    transition: color 0.3s;
 }
 
 .footer-section a:hover {
-    color: var(--saffron);
+    color: var(--primary);
 }
 
 .social-links {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
-}
-
-.social-links a {
-    font-size: 1.5rem;
 }
 
 .footer-bottom {
@@ -353,7 +300,7 @@ body {
     font-size: 0.8rem;
 }
 
-/* Page Content Styling */
+/* Page Content */
 .page-content {
     max-width: 900px;
     margin: 2rem auto;
@@ -364,13 +311,37 @@ body {
 }
 
 .page-content h1 {
-    color: var(--navy);
+    color: var(--primary);
     margin-bottom: 1rem;
 }
 
 .page-content h2 {
     margin: 1.5rem 0 1rem;
-    color: var(--charcoal);
+    color: var(--dark);
+}
+
+/* Category Tags */
+.category-tag {
+    display: inline-block;
+    background: var(--light);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: var(--gray);
+    text-decoration: none;
+}
+
+.category-tag:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.no-posts {
+    text-align: center;
+    padding: 3rem;
+    color: var(--gray);
+    background: var(--light);
+    border-radius: 12px;
 }
 
 /* Responsive */
@@ -396,39 +367,12 @@ body {
     .featured-grid {
         grid-template-columns: 1fr;
     }
-    
-    .post-meta {
-        gap: 0.75rem;
-    }
 }
 
-/* Category Tags */
-.category-tag {
-    display: inline-block;
-    background: var(--light-gray);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    color: var(--text-light);
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.category-tag:hover {
-    background: var(--saffron);
-    color: white;
-}
-
-/* No Posts Message */
-.no-posts {
-    text-align: center;
-    padding: 3rem;
-    color: var(--text-light);
-    background: var(--light-gray);
-    border-radius: 12px;
-}
-
-/* Ad Space Styles */
-.ad-container {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+pre {
+    background: var(--light);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.8rem;
 }
