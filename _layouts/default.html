@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="nav-container">
+        <div class="logo">
+            <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ '/' | relative_url }}">🏠 Home</a></li>
+            <li><a href="{{ '/categories.html' | relative_url }}">📂 Categories</a></li>
+            <li><a href="{{ '/about.html' | relative_url }}">📖 About</a></li>
+            <li><a href="{{ '/contact.html' | relative_url }}">📧 Contact</a></li>
+            <li><a href="{{ '/terms.html' | relative_url }}">⚖️ Terms</a></li>
+            <li><a href="{{ '/privacy.html' | relative_url }}">🔒 Privacy</a></li>
+            <li><a href="{{ '/admin.html' | relative_url }}" style="color: #2563EB; font-weight: bold;">👑 Admin</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    {{ content }}
+</main>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>{{ site.title }}</h4>
+            <p>Thoughts, stories, and ideas worth sharing</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="{{ '/about.html' | relative_url }}">About</a>
+            <a href="{{ '/contact.html' | relative_url }}">Contact</a>
+            <a href="{{ '/terms.html' | relative_url }}">Terms</a>
+            <a href="{{ '/privacy.html' | relative_url }}">Privacy</a>
+        </div>
+        <div class="footer-section">
+            <h4>Connect</h4>
+            <p>📸 Instagram: <a href="https://instagram.com/nemogotmad" target="_blank">@nemogotmad</a></p>
+            <p>📧 Email: <a href="mailto:pragsnemo01@gmail.com">pragsnemo01@gmail.com</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
