@@ -1,11 +1,10 @@
 ---
 layout: default
-title: "Categories - Delhi Voices"
+title: "Categories"
 ---
 
 <div class="page-content">
-    <h1>📂 All Categories</h1>
-    <p>Browse articles by category from Delhi Voices</p>
+    <h1>All Categories</h1>
     
     <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0;">
         {% assign all_categories = "" | split: "," %}
@@ -27,26 +26,16 @@ title: "Categories - Delhi Voices"
         {% endif %}
     </div>
     
-    <hr style="margin: 2rem 0;">
+    <hr>
     
-    <h2>➕ How to Add Categories</h2>
-    <p>When writing an article, add this to the top of your file:</p>
-    <pre style="background: #f0f0f0; padding: 1rem; border-radius: 8px;">
+    <h2>How to Add Categories</h2>
+    <p>Add this to the top of your article:</p>
+    <pre>
 ---
 title: "Your Article"
 date: 2026-04-14
-categories: [Politics, Delhi, Culture]
+categories: [Technology, Reviews]
 highlight: false
 ---
     </pre>
-    <p>Then visit this page to see articles grouped by category automatically!</p>
-    
-    <h2>💡 Popular Categories for Delhi</h2>
-    <ul>
-        <li><strong>Delhi News</strong> - Latest from the capital</li>
-        <li><strong>Politics</strong> - Delhi elections & governance</li>
-        <li><strong>Culture</strong> - Art, music, food in Delhi</li>
-        <li><strong>Tech</strong> - Startups & innovation in NCR</li>
-        <li><strong>Opinion</strong> - Editorials from Delhi writers</li>
-    </ul>
 </div>
