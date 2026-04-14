@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Delhi Voices - Admin Panel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0a0e1a;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #FF9933;
+            margin-bottom: 2rem;
+        }
+        .admin-header h1 {
+            font-size: 1.8rem;
+            color: #FF9933;
+        }
+        .admin-header h1 span {
+            color: #138808;
+        }
+        .btn {
+            background: #FF9933;
+            color: #0a0e1a;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,153,51,0.3);
+        }
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        .btn-secondary {
+            background: #2c3e50;
+            color: white;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: #111827;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border-left: 4px solid #FF9933;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FF9933;
+        }
+        .category-section, .articles-section {
+            background: #111827;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #FF9933;
+        }
+        .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .category-item {
+            background: #1f2937;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .category-remove {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .add-category {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .add-category input {
+            flex: 1;
+            padding: 0.5rem;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            color: white;
+        }
+        .article-table {
+            width: 100%;
+            overflow-x: auto;
+        }
+        .article-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #1f2937;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .article-row.highlighted {
+            background: rgba(255,153,51,0.1);
+            border-left: 3px solid #FF9933;
+        }
+        .article-info {
+            flex: 1;
+        }
+        .article-title {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        .article-meta {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+        .badge {
+            background: #FF9933;
+            color: #0a0e1a;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        .article-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        .article-actions a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .article-actions a:hover {
+            color: #FF9933;
+        }
+        .quick-tools {
+            background: #111827;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .tool-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        pre {
+            background: #1f2937;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 768px) {
+            .article-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .article-actions {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>🇮🇳 <span>Delhi</span> Voices · Admin Panel</h1>
+        <div>
+            <a href="/" class="btn btn-secondary" target="_blank">📱 View Site</a>
+            <a href="https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/new/main/_posts" class="btn" target="_blank" style="margin-left: 10px;">+ New Article</a>
+        </div>
+    </div>
+
+    <div class="stats-grid" id="stats">
+        <div class="stat-card"><div class="stat-number" id="totalArticles">-</div><div>Total Articles</div></div>
+        <div class="stat-card"><div class="stat-number" id="highlightedArticles">-</div><div>Highlighted</div></div>
+        <div class="stat-card"><div class="stat-number" id="totalCategories">-</div><div>Categories</div></div>
+        <div class="stat-card"><div class="stat-number">Delhi NCR</div><div>📍 Based In</div></div>
+    </div>
+
+    <div class="category-section">
+        <h2 class="section-title">📂 Manage Categories</h2>
+        <div class="category-list" id="categoryList"></div>
+        <div class="add-category">
+            <input type="text" id="newCategory" placeholder="New category name (e.g., Politics, Tech, Culture)">
+            <button class="btn" onclick="addCategory()">+ Add Category</button>
+        </div>
+        <pre>💡 Tip: Add categories to your article's front matter: categories: [Politics, Delhi]</pre>
+    </div>
+
+    <div class="articles-section">
+        <h2 class="section-title">📄 All Articles</h2>
+        <div id="articlesList" class="article-table">Loading articles...</div>
+    </div>
+
+    <div class="quick-tools">
+        <h2 class="section-title">⚡ Quick Actions</h2>
+        <div class="tool-buttons">
+            <button class="btn" onclick="copyHighlightCode()">📋 Copy Highlight Code</button>
+            <button class="btn btn-secondary" onclick="copyAdCode()">💰 Copy Ad Code</button>
+            <a href="https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/edit/main/_config.yml" class="btn btn-secondary" target="_blank">🎨 Change Site Colors</a>
+            <a href="https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/edit/main/style.css" class="btn btn-secondary" target="_blank">🎨 Edit CSS Theme</a>
+        </div>
+        <pre id="codeOutput" style="display: none;"></pre>
+    </div>
+</div>
+
+<script>
+    const REPO = "YOUR_USERNAME/YOUR_REPO_NAME";  // CHANGE THIS
+    const BRANCH = "main";
+
+    // Load articles from GitHub
+    async function loadArticles() {
+        try {
+            const response = await fetch(`https://api.github.com/repos/${REPO}/contents/_posts`);
+            if (!response.ok) throw new Error('Failed to load');
+            const files = await response.json();
+            
+            if (!Array.isArray(files) || files.length === 0) {
+                document.getElementById('articlesList').innerHTML = '<div class="article-row">No articles yet. Click "New Article" to start!</div>';
+                document.getElementById('totalArticles').innerText = '0';
+                document.getElementById('highlightedArticles').innerText = '0';
+                return;
+            }
+
+            let articlesHtml = '';
+            let highlightedCount = 0;
+            let categoriesSet = new Set();
+
+            for (const file of files) {
+                if (file.name.endsWith('.md')) {
+                    const contentRes = await fetch(file.download_url);
+                    const content = await contentRes.text();
+                    const hasHighlight = content.includes('highlight: true');
+                    if (hasHighlight) highlightedCount++;
+                    
+                    // Extract categories from front matter
+                    const catMatch = content.match(/categories:\s*\[(.*?)\]/);
+                    if (catMatch) {
+                        catMatch[1].split(',').forEach(c => categoriesSet.add(c.trim()));
+                    }
+                    
+                    const title = file.name.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace('.md', '').replace(/-/g, ' ');
+                    const date = file.name.substring(0, 10);
+                    
+                    articlesHtml += `
+                        <div class="article-row ${hasHighlight ? 'highlighted' : ''}">
+                            <div class="article-info">
+                                <div class="article-title">
+                                    ${title}
+                                    ${hasHighlight ? '<span class="badge">⭐ HIGHLIGHTED</span>' : ''}
+                                </div>
+                                <div class="article-meta">${date} · ${file.name}</div>
+                            </div>
+                            <div class="article-actions">
+                                <a href="https://github.com/${REPO}/edit/${BRANCH}/_posts/${file.name}" target="_blank">✏️ Edit</a>
+                                <a href="https://github.com/${REPO}/delete/${BRANCH}/_posts/${file.name}" target="_blank" style="color:#dc3545;">🗑️ Delete</a>
+                                <a href="https://raw.githubusercontent.com/${REPO}/${BRANCH}/_posts/${file.name}" target="_blank">📄 Raw</a>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            
+            document.getElementById('articlesList').innerHTML = articlesHtml;
+            document.getElementById('totalArticles').innerText = files.filter(f => f.name.endsWith('.md')).length;
+            document.getElementById('highlightedArticles').innerText = highlightedCount;
+            document.getElementById('totalCategories').innerText = categoriesSet.size;
+            
+            // Display categories
+            let catHtml = '';
+            categoriesSet.forEach(cat => {
+                catHtml += `<div class="category-item">#${cat}</div>`;
+            });
+            document.getElementById('categoryList').innerHTML = catHtml || '<p>No categories yet. Add categories to your articles!</p>';
+            
+        } catch (error) {
+            document.getElementById('articlesList').innerHTML = '<div class="article-row">Error loading articles. Make sure your repo is public.</div>';
+        }
+    }
+
+    function addCategory() {
+        const cat = document.getElementById('newCategory').value.trim();
+        if (cat) {
+            alert(`To add "${cat}" as a category:\n\n1. Edit any article\n2. Add to front matter: categories: [${cat}]\n3. Or create a new article with that category`);
+            document.getElementById('newCategory').value = '';
+        }
+    }
+
+    function copyHighlightCode() {
+        const code = `---
+title: "Your Article Title"
+date: YYYY-MM-DD
+highlight: true
+categories: [Your Category]
+---
+
+> [!IMPORTANT]
+> This is a highlighted point for Delhi readers!
+
+Your article content here...`;
+        navigator.clipboard.writeText(code);
+        alert('Highlight template copied! Paste it into your new article.');
+    }
+
+    function copyAdCode() {
+        const code = `<!-- Place this ad code anywhere in your article -->
+<div class="ad-container" style="margin: 2rem 0;">
+    <div class="ad-label">Sponsored</div>
+    <div class="ad-content">
+        <p>📢 Advertise with Delhi Voices | Contact: pragsnemo01@gmail.com</p>
+    </div>
+</div>`;
+        navigator.clipboard.writeText(code);
+        alert('Ad code copied! Paste it into any article.');
+    }
+
+    loadArticles();
+</script>
+</body>
+</html>
