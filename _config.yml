@@ -1,21 +1,14 @@
-title: "Delhi Voices"
-description: "Latest news, culture & stories from India's capital"
-url: "https://yourdomain.com"  # Change to your custom domain
+title: "Nemo's Articles"
+description: "Thoughts, stories, and ideas worth sharing"
+url: "https://nemogotmad.github.io"
 author: "Nemo Gotmad"
 email: pragsnemo01@gmail.com
 timezone: Asia/Kolkata
-locale: en_IN
 
 # Build settings
 markdown: kramdown
 highlighter: rouge
 permalink: /:year/:month/:title/
-
-# Collections for categories
-collections:
-  categories:
-    output: true
-    permalink: /category/:path/
 
 # Defaults
 defaults:
