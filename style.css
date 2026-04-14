@@ -103,25 +103,6 @@ body {
     opacity: 0.9;
 }
 
-/* Ads */
-.ad-container {
-    max-width: 1280px;
-    margin: 2rem auto;
-    background: var(--light);
-    border: 1px dashed var(--border);
-    border-radius: 8px;
-    text-align: center;
-    padding: 1rem;
-}
-
-.ad-label {
-    font-size: 0.7rem;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
-}
-
 /* Section Titles */
 .section-title {
     font-size: 2rem;
@@ -262,6 +243,12 @@ body {
     font-weight: bold;
 }
 
+.newsletter-note {
+    font-size: 0.7rem;
+    margin-top: 1rem;
+    opacity: 0.8;
+}
+
 /* Footer */
 .site-footer {
     background: var(--dark);
@@ -346,7 +333,7 @@ body {
     border-radius: 12px;
 }
 
-/* Article Page Styling */
+/* Article Page */
 article {
     max-width: 900px;
     margin: 2rem auto;
@@ -370,6 +357,7 @@ article .post-meta {
 article img {
     max-width: 100%;
     border-radius: 8px;
+    margin: 1rem 0;
 }
 
 /* Responsive */
