@@ -1,212 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex">
-    <title>Admin Panel - Nemo's Articles</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #0a0e1a;
-            color: #e0e0e0;
-            padding: 20px;
-        }
-        .admin-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #2563EB;
-            margin-bottom: 2rem;
-        }
-        .admin-header h1 {
-            font-size: 1.8rem;
-            color: #2563EB;
-        }
-        .btn {
-            background: #2563EB;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-danger {
-            background: #dc3545;
-        }
-        .btn-secondary {
-            background: #374151;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        .stat-card {
-            background: #111827;
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: center;
-            border-left: 4px solid #2563EB;
-        }
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2563EB;
-        }
-        .category-section, .articles-section, .quick-tools {
-            background: #111827;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #2563EB;
-        }
-        .category-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-        .category-item {
-            background: #1f2937;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-        .add-category {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        .add-category input {
-            flex: 1;
-            padding: 0.5rem;
-            background: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 6px;
-            color: white;
-        }
-        .article-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #1f2937;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .article-row.highlighted {
-            background: rgba(37,99,235,0.1);
-            border-left: 3px solid #2563EB;
-        }
-        .article-title {
-            font-weight: bold;
-            margin-bottom: 0.25rem;
-        }
-        .article-meta {
-            font-size: 0.75rem;
-            color: #9ca3af;
-        }
-        .badge {
-            background: #2563EB;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            margin-left: 0.5rem;
-        }
-        .article-actions {
-            display: flex;
-            gap: 0.75rem;
-        }
-        .article-actions a {
-            color: #9ca3af;
-            text-decoration: none;
-            font-size: 0.85rem;
-        }
-        .article-actions a:hover {
-            color: #2563EB;
-        }
-        .tool-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        pre {
-            background: #1f2937;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-size: 0.8rem;
-            margin-top: 1rem;
-        }
-        @media (max-width: 768px) {
-            .article-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-    </style>
-</head>
-<body>
-<div class="admin-container">
-    <div class="admin-header">
-        <h1>📝 Nemo's Articles · Admin Panel</h1>
-        <div>
-            <a href="/" class="btn btn-secondary" target="_blank">📱 View Site</a>
-            <a href="https://github.com/nemogotmad/nemogotmad.github.io/new/main/_posts" class="btn" target="_blank" style="margin-left: 10px;">+ New Article</a>
-        </div>
+---
+layout: default
+title: "Admin Panel"
+---
+
+<div class="page-content">
+    <h1>👑 Admin Panel</h1>
+    <p>Manage your articles from here. Click the buttons below to add, edit, or delete articles.</p>
+
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 2rem 0;">
+        <a href="https://github.com/nemogotmad/nemogotmad.github.io/new/main/_posts" class="btn" target="_blank" style="background: #2563EB; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">➕ Create New Article</a>
+        <a href="https://github.com/nemogotmad/nemogotmad.github.io/tree/main/_posts" class="btn" target="_blank" style="background: #374151; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">📁 Manage All Articles</a>
     </div>
 
-    <div class="stats-grid" id="stats">
-        <div class="stat-card"><div class="stat-number" id="totalArticles">-</div><div>Total Articles</div></div>
-        <div class="stat-card"><div class="stat-number" id="highlightedArticles">-</div><div>Highlighted</div></div>
-        <div class="stat-card"><div class="stat-number" id="totalCategories">-</div><div>Categories</div></div>
-        <div class="stat-card"><div class="stat-number">Live</div><div>Status</div></div>
-    </div>
+    <h2>📝 Your Articles</h2>
+    <div id="articlesList" style="margin-top: 1rem;">Loading...</div>
 
-    <div class="category-section">
-        <h2 class="section-title">📂 Manage Categories</h2>
-        <div class="category-list" id="categoryList"></div>
-        <div class="add-category">
-            <input type="text" id="newCategory" placeholder="New category name (e.g., Technology, Lifestyle, Reviews)">
-            <button class="btn" onclick="addCategory()">+ Add Category</button>
-        </div>
-        <pre>💡 Tip: Add categories to your article's front matter: categories: [Technology, Reviews]</pre>
-    </div>
+    <h2 style="margin-top: 2rem;">📋 How to Write an Article</h2>
+    <ol style="margin-left: 1.5rem;">
+        <li>Click <strong>"Create New Article"</strong> above</li>
+        <li>Name your file: <code>YYYY-MM-DD-title-with-dashes.md</code> (example: <code>2026-04-14-my-first-article.md</code>)</li>
+        <li>Copy this template into the file:</li>
+    </ol>
 
-    <div class="articles-section">
-        <h2 class="section-title">📄 All Articles</h2>
-        <div id="articlesList" class="article-table">Loading articles...</div>
-    </div>
+    <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; margin-top: 1rem;">
+---
+title: "Your Article Title Here"
+date: 2026-04-14
+highlight: false
+categories: [Category1, Category2]
+---
 
-    <div class="quick-tools">
-        <h2 class="section-title">⚡ Quick Actions</h2>
-        <div class="tool-buttons">
-            <button class="btn" onclick="copyHighlightCode()">📋 Copy Highlight Template</button>
-            <button class="btn btn-secondary" onclick="copyAdCode()">💰 Copy Ad Code</button>
-            <a href="https://github.com/nemogotmad/nemogotmad.github.io/edit/main/_config.yml" class="btn btn-secondary" target="_blank">⚙️ Edit Config</a>
-            <a href="https://github.com/nemogotmad/nemogotmad.github.io/edit/main/style.css" class="btn btn-secondary" target="_blank">🎨 Edit Theme</a>
-        </div>
-        <pre id="codeOutput" style="display: none;"></pre>
-    </div>
+> [!IMPORTANT]
+> This is an important point you want to highlight!
+
+Your article content goes here. Use **Markdown** for formatting.
+
+## Subheading
+
+More content here...
+
+- Bullet points
+- Lists
+- [Links](https://example.com)
+    </pre>
+
+    <h2 style="margin-top: 2rem;">⭐ How to Highlight an Article</h2>
+    <p>Change <code>highlight: false</code> to <code>highlight: true</code> in the article's front matter. Highlighted articles appear in the Featured section on the homepage.</p>
+
+    <h2>📂 How to Add Categories</h2>
+    <p>In the front matter, change <code>categories: [Category1, Category2]</code> to your desired categories.</p>
+
+    <h2>💰 How to Add Ads in Your Articles</h2>
+    <p>Paste this code anywhere in your article:</p>
+    <pre style="background: #1e1e1e; color: #d4d4d4;">
+&lt;div class="ad-container" style="margin: 2rem 0;"&gt;
+    &lt;div class="ad-label"&gt;Sponsored&lt;/div&gt;
+    &lt;div class="ad-content"&gt;
+        &lt;p&gt;📢 Advertise here | Contact: pragsnemo01@gmail.com&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+    </pre>
 </div>
 
 <script>
@@ -217,102 +70,48 @@
             const files = await response.json();
             
             if (!Array.isArray(files) || files.length === 0) {
-                document.getElementById('articlesList').innerHTML = '<div class="article-row">No articles yet. Click "New Article" to start!</div>';
-                document.getElementById('totalArticles').innerText = '0';
-                document.getElementById('highlightedArticles').innerText = '0';
+                document.getElementById('articlesList').innerHTML = '<p>No articles yet. Click "Create New Article" to start!</p>';
                 return;
             }
 
-            let articlesHtml = '';
-            let highlightedCount = 0;
-            let categoriesSet = new Set();
-
+            let html = '<div style="border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">';
             for (const file of files) {
                 if (file.name.endsWith('.md')) {
                     const contentRes = await fetch(file.download_url);
                     const content = await contentRes.text();
                     const hasHighlight = content.includes('highlight: true');
-                    if (hasHighlight) highlightedCount++;
-                    
-                    const catMatch = content.match(/categories:\s*\[(.*?)\]/);
-                    if (catMatch) {
-                        catMatch[1].split(',').forEach(c => categoriesSet.add(c.trim()));
-                    }
-                    
                     const title = file.name.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace('.md', '').replace(/-/g, ' ');
                     const date = file.name.substring(0, 10);
                     
-                    articlesHtml += `
-                        <div class="article-row ${hasHighlight ? 'highlighted' : ''}">
-                            <div class="article-info">
-                                <div class="article-title">
-                                    ${title}
-                                    ${hasHighlight ? '<span class="badge">⭐ HIGHLIGHTED</span>' : ''}
-                                </div>
-                                <div class="article-meta">${date} · ${file.name}</div>
+                    html += `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #e2e8f0; ${hasHighlight ? 'background: #eff6ff;' : ''}">
+                            <div>
+                                <strong>${title}</strong>
+                                ${hasHighlight ? '<span style="background: #2563EB; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; margin-left: 8px;">⭐ Highlighted</span>' : ''}
+                                <div style="font-size: 0.8rem; color: #64748b;">${date} · ${file.name}</div>
                             </div>
-                            <div class="article-actions">
-                                <a href="https://github.com/nemogotmad/nemogotmad.github.io/edit/main/_posts/${file.name}" target="_blank">✏️ Edit</a>
-                                <a href="https://github.com/nemogotmad/nemogotmad.github.io/delete/main/_posts/${file.name}" target="_blank" style="color:#dc3545;">🗑️ Delete</a>
-                                <a href="https://raw.githubusercontent.com/nemogotmad/nemogotmad.github.io/main/_posts/${file.name}" target="_blank">📄 Raw</a>
+                            <div style="display: flex; gap: 0.75rem;">
+                                <a href="https://github.com/nemogotmad/nemogotmad.github.io/edit/main/_posts/${file.name}" target="_blank" style="color: #2563EB; text-decoration: none;">✏️ Edit</a>
+                                <a href="https://github.com/nemogotmad/nemogotmad.github.io/delete/main/_posts/${file.name}" target="_blank" style="color: #dc2626; text-decoration: none;">🗑️ Delete</a>
+                                <a href="${file.download_url}" target="_blank" style="color: #64748b; text-decoration: none;">📄 View</a>
                             </div>
                         </div>
                     `;
                 }
             }
-            
-            document.getElementById('articlesList').innerHTML = articlesHtml;
-            document.getElementById('totalArticles').innerText = files.filter(f => f.name.endsWith('.md')).length;
-            document.getElementById('highlightedArticles').innerText = highlightedCount;
-            document.getElementById('totalCategories').innerText = categoriesSet.size;
-            
-            let catHtml = '';
-            categoriesSet.forEach(cat => {
-                catHtml += `<div class="category-item">#${cat}</div>`;
-            });
-            document.getElementById('categoryList').innerHTML = catHtml || '<p>No categories yet.</p>';
-            
+            html += '</div>';
+            document.getElementById('articlesList').innerHTML = html;
         } catch (error) {
-            document.getElementById('articlesList').innerHTML = '<div class="article-row">Error loading articles.</div>';
+            document.getElementById('articlesList').innerHTML = '<p>Error loading articles. Make sure your repository is public.</p>';
         }
     }
-
-    function addCategory() {
-        const cat = document.getElementById('newCategory').value.trim();
-        if (cat) {
-            alert(`To add "${cat}" as a category:\n\n1. Edit any article\n2. Add to front matter: categories: [${cat}]\n3. Or create a new article with that category`);
-            document.getElementById('newCategory').value = '';
-        }
-    }
-
-    function copyHighlightCode() {
-        const code = `---
-title: "Your Article Title"
-date: YYYY-MM-DD
-highlight: true
-categories: [Your Category]
----
-
-> [!IMPORTANT]
-> This is an important highlighted point!
-
-Your article content here...`;
-        navigator.clipboard.writeText(code);
-        alert('Highlight template copied!');
-    }
-
-    function copyAdCode() {
-        const code = `<div class="ad-container" style="margin: 2rem 0;">
-    <div class="ad-label">Sponsored</div>
-    <div class="ad-content">
-        <p>📢 Advertise here | Contact: pragsnemo01@gmail.com</p>
-    </div>
-</div>`;
-        navigator.clipboard.writeText(code);
-        alert('Ad code copied!');
-    }
-
     loadArticles();
 </script>
-</body>
-</html>
+
+<style>
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+        transition: all 0.3s;
+    }
+</style>
