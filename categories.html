@@ -1,0 +1,52 @@
+---
+layout: default
+title: "Categories - Delhi Voices"
+---
+
+<div class="page-content">
+    <h1>📂 All Categories</h1>
+    <p>Browse articles by category from Delhi Voices</p>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0;">
+        {% assign all_categories = "" | split: "," %}
+        {% for post in site.posts %}
+            {% for category in post.categories %}
+                {% assign all_categories = all_categories | push: category %}
+            {% endfor %}
+        {% endfor %}
+        {% assign unique_categories = all_categories | uniq | sort %}
+        
+        {% for category in unique_categories %}
+        <a href="/category/{{ category | slugify }}" class="category-tag" style="font-size: 1rem; padding: 0.5rem 1rem;">
+            #{{ category }}
+        </a>
+        {% endfor %}
+        
+        {% if unique_categories.size == 0 %}
+        <p>No categories yet. Add categories to your articles!</p>
+        {% endif %}
+    </div>
+    
+    <hr style="margin: 2rem 0;">
+    
+    <h2>➕ How to Add Categories</h2>
+    <p>When writing an article, add this to the top of your file:</p>
+    <pre style="background: #f0f0f0; padding: 1rem; border-radius: 8px;">
+---
+title: "Your Article"
+date: 2026-04-14
+categories: [Politics, Delhi, Culture]
+highlight: false
+---
+    </pre>
+    <p>Then visit this page to see articles grouped by category automatically!</p>
+    
+    <h2>💡 Popular Categories for Delhi</h2>
+    <ul>
+        <li><strong>Delhi News</strong> - Latest from the capital</li>
+        <li><strong>Politics</strong> - Delhi elections & governance</li>
+        <li><strong>Culture</strong> - Art, music, food in Delhi</li>
+        <li><strong>Tech</strong> - Startups & innovation in NCR</li>
+        <li><strong>Opinion</strong> - Editorials from Delhi writers</li>
+    </ul>
+</div>
