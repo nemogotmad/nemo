@@ -1,0 +1,108 @@
+---
+layout: default
+title: "Delhi Voices - Latest News & Stories from India's Capital"
+---
+
+<div class="hero">
+    <div class="hero-content">
+        <h1>Delhi Voices</h1>
+        <p>Your trusted source for authentic news, culture, and stories from the heart of India's capital</p>
+        <div class="hero-meta">📍 Based in Delhi, India | 🇮🇳 Established 2026</div>
+    </div>
+</div>
+
+<!-- Ad Space - Top Banner -->
+<div class="ad-container">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-content">
+        <p>📢 Your Ad Here | Contact: pragsnemo01@gmail.com</p>
+    </div>
+</div>
+
+<!-- Featured Highlights Section -->
+<section class="featured-section">
+    <h2 class="section-title">
+        <span class="title-icon">⭐</span> 
+        Featured Highlights
+        <span class="title-line"></span>
+    </h2>
+    <div class="featured-grid">
+        {% assign featured_posts = site.posts | where: "highlight", "true" %}
+        {% if featured_posts.size == 0 %}
+            <p class="no-posts">No featured articles yet. Check back soon!</p>
+        {% else %}
+            {% for post in featured_posts limit:4 %}
+            <article class="featured-card">
+                <div class="featured-badge">🔥 Featured</div>
+                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                <div class="post-meta">
+                    <span>📅 {{ post.date | date: "%B %d, %Y" }}</span>
+                    <span>📁 {{ post.categories | join: ", " }}</span>
+                </div>
+                <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+                <a href="{{ post.url }}" class="read-more">Read Full Story →</a>
+            </article>
+            {% endfor %}
+        {% endif %}
+    </div>
+</section>
+
+<!-- Ad Space - Mid Page -->
+<div class="ad-container ad-mid">
+    <div class="ad-label">Sponsored</div>
+    <div class="ad-content">
+        <p>🎯 Promote your business in Delhi | Call: +91-XXXXXXXXXX</p>
+    </div>
+</div>
+
+<!-- Latest Articles Section -->
+<section class="latest-section">
+    <h2 class="section-title">
+        <span class="title-icon">📰</span> 
+        Latest Articles
+        <span class="title-line"></span>
+    </h2>
+    <div class="articles-list">
+        {% assign all_posts = site.posts %}
+        {% if all_posts.size == 0 %}
+            <p class="no-posts">No articles yet. Use the admin panel to create your first article!</p>
+        {% else %}
+            {% for post in all_posts %}
+            <article class="article-item">
+                <div class="article-content">
+                    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                    <div class="post-meta">
+                        <span>📅 {{ post.date | date: "%B %d, %Y" }}</span>
+                        <span>🕐 {{ post.date | date: "%I:%M %p" }} IST</span>
+                        <span>📍 New Delhi</span>
+                    </div>
+                    <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
+                    <div class="article-footer">
+                        <a href="{{ post.url }}" class="read-more">Continue Reading →</a>
+                        <span class="read-time">⏱️ {{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        {% endif %}
+    </div>
+</section>
+
+<!-- Ad Space - Bottom -->
+<div class="ad-container ad-bottom">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-content">
+        <p>📧 Reach Delhi's smartest readers | pragsnemo01@gmail.com</p>
+    </div>
+</div>
+
+<!-- Newsletter Signup - Delhi Specific -->
+<div class="newsletter">
+    <h3>🇮🇳 Stay Updated with Delhi News</h3>
+    <p>Get the latest stories from Delhi NCR delivered to your inbox</p>
+    <form class="newsletter-form">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe →</button>
+    </form>
+    <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
+</div>
