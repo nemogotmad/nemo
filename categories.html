@@ -4,7 +4,8 @@ title: "Categories"
 ---
 
 <div class="page-content">
-    <h1>All Categories</h1>
+    <h1>📂 All Categories</h1>
+    <p>Browse articles by category</p>
     
     <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0;">
         {% assign all_categories = "" | split: "," %}
@@ -16,7 +17,7 @@ title: "Categories"
         {% assign unique_categories = all_categories | uniq | sort %}
         
         {% for category in unique_categories %}
-        <a href="/category/{{ category | slugify }}" class="category-tag" style="font-size: 1rem; padding: 0.5rem 1rem;">
+        <a href="#" class="category-tag" style="font-size: 1rem; padding: 0.5rem 1rem; background: #2563EB; color: white; text-decoration: none; border-radius: 20px;">
             #{{ category }}
         </a>
         {% endfor %}
@@ -26,16 +27,26 @@ title: "Categories"
         {% endif %}
     </div>
     
-    <hr>
+    <hr style="margin: 2rem 0;">
     
-    <h2>How to Add Categories</h2>
-    <p>Add this to the top of your article:</p>
-    <pre>
+    <h2>📝 How to Add Categories</h2>
+    <p>When writing an article, add this to the top of your file (called "front matter"):</p>
+    <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px;">
 ---
-title: "Your Article"
+title: "Your Article Title"
 date: 2026-04-14
-categories: [Technology, Reviews]
+categories: [Technology, Reviews, Lifestyle]
 highlight: false
 ---
     </pre>
+    <p>Then articles will automatically appear under these categories!</p>
+    
+    <h2>💡 Popular Category Ideas</h2>
+    <ul>
+        <li><strong>Technology</strong> - Gadgets, software, tech news</li>
+        <li><strong>Reviews</strong> - Product and service reviews</li>
+        <li><strong>Lifestyle</strong> - Life tips, productivity, wellness</li>
+        <li><strong>Personal</strong> - Personal stories and experiences</li>
+        <li><strong>Opinion</strong> - Editorials and thought pieces</li>
+    </ul>
 </div>
