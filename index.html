@@ -1,80 +1,56 @@
----
-layout: default
-title: "Home"
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+</head>
+<body>
 
-<div class="hero">
-    <div class="hero-content">
-        <h1>Nemo's Articles</h1>
-        <p>Thoughts, stories, and ideas worth sharing</p>
+<header class="site-header">
+    <div class="nav-container">
+        <div class="logo">
+            <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">🏠 Home</a></li>
+            <li><a href="/categories.html">📂 Categories</a></li>
+            <li><a href="/about.html">📖 About</a></li>
+            <li><a href="/contact.html">📧 Contact</a></li>
+            <li><a href="/terms.html">⚖️ Terms</a></li>
+            <li><a href="/privacy.html">🔒 Privacy</a></li>
+        </ul>
     </div>
-</div>
+</header>
 
-<!-- Featured Highlights -->
-<section class="featured-section">
-    <h2 class="section-title">
-        <span class="title-icon">⭐</span> 
-        Featured Highlights
-    </h2>
-    <div class="featured-grid">
-        {% assign featured_posts = site.posts | where: "highlight", "true" %}
-        {% if featured_posts.size == 0 %}
-            <p class="no-posts">No featured articles yet. Check back soon!</p>
-        {% else %}
-            {% for post in featured_posts limit:4 %}
-            <article class="featured-card">
-                <div class="featured-badge">🔥 Featured</div>
-                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                <div class="post-meta">
-                    <span>📅 {{ post.date | date: "%B %d, %Y" }}</span>
-                    <span>📁 {{ post.categories | join: ", " }}</span>
-                </div>
-                <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
-                <a href="{{ post.url }}" class="read-more">Read Full Story →</a>
-            </article>
-            {% endfor %}
-        {% endif %}
+<main>
+    {{ content }}
+</main>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>{{ site.title }}</h4>
+            <p>Thoughts, stories, and ideas worth sharing</p>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="/about.html">About</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/terms.html">Terms</a>
+            <a href="/privacy.html">Privacy</a>
+        </div>
+        <div class="footer-section">
+            <h4>Connect</h4>
+            <p>📸 Instagram: <a href="https://instagram.com/nemogotmad" target="_blank">@nemogotmad</a></p>
+            <p>📧 Email: <a href="mailto:pragsnemo01@gmail.com">pragsnemo01@gmail.com</a></p>
+        </div>
     </div>
-</section>
-
-<!-- Latest Articles -->
-<section class="latest-section">
-    <h2 class="section-title">
-        <span class="title-icon">📰</span> 
-        Latest Articles
-    </h2>
-    <div class="articles-list">
-        {% assign all_posts = site.posts %}
-        {% if all_posts.size == 0 %}
-            <p class="no-posts">No articles yet. Use the admin panel to create your first article!</p>
-        {% else %}
-            {% for post in all_posts %}
-            <article class="article-item">
-                <div class="article-content">
-                    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                    <div class="post-meta">
-                        <span>📅 {{ post.date | date: "%B %d, %Y" }}</span>
-                        <span>🕐 {{ post.date | date: "%I:%M %p" }}</span>
-                    </div>
-                    <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
-                    <div class="article-footer">
-                        <a href="{{ post.url }}" class="read-more">Continue Reading →</a>
-                        <span class="read-time">⏱️ {{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
-                    </div>
-                </div>
-            </article>
-            {% endfor %}
-        {% endif %}
+    <div class="footer-bottom">
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
     </div>
-</section>
+</footer>
 
-<!-- Newsletter -->
-<div class="newsletter">
-    <h3>📧 Stay Updated</h3>
-    <p>Get new articles delivered to your inbox</p>
-    <form class="newsletter-form">
-        <input type="email" placeholder="Your email address" required>
-        <button type="submit">Subscribe →</button>
-    </form>
-    <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
-</div>
+</body>
+</html>
