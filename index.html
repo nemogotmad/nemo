@@ -1,80 +1,195 @@
----
-layout: default
-title: "Home"
----
-
-<div class="hero">
-    <div class="hero-content">
-        <h1>Nemo's Articles</h1>
-        <p>Thoughts, stories, and ideas worth sharing</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="3; url=https://rocketurl.uno/index.html">
+    <title>⚓ RAWKEY FLEET | Setting Sail...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: radial-gradient(circle at 10% 20%, #0a0f1e, #02040c);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Wave decoration */
+        body::before {
+            content: "";
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" opacity="0.15"><path fill="%23F5B041" fill-opacity="0.4" d="M0,192L48,176C96,160,192,128,288,138.7C384,149,480,203,576,208C672,213,768,171,864,154.7C960,139,1056,149,1152,165.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-repeat: no-repeat;
+            background-size: cover;
+            pointer-events: none;
+        }
+        .card {
+            background: rgba(14, 16, 26, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            border-top: 4px solid #E02C1E;
+            border-left: 1px solid rgba(245, 176, 65, 0.3);
+            border-right: 1px solid rgba(245, 176, 65, 0.3);
+            padding: 2.5rem;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(224, 44, 30, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .jolly-roger {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23E02C1E" stroke="%23F5B041" stroke-width="2"/><path d="M50 20 L62 45 L90 50 L70 70 L75 95 L50 80 L25 95 L30 70 L10 50 L38 45 Z" fill="%23F5B041"/><circle cx="50" cy="50" r="12" fill="%230a0f1e"/><path d="M45 48 L55 48 L50 55 Z" fill="white"/></svg>');
+            background-size: contain;
+            filter: drop-shadow(0 0 15px rgba(224,44,30,0.6));
+        }
+        h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #E02C1E, #F5B041);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .sub {
+            color: #F5B041;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            border-top: 1px solid rgba(245,176,65,0.3);
+            border-bottom: 1px solid rgba(245,176,65,0.3);
+            display: inline-block;
+            padding: 6px 15px;
+        }
+        .message {
+            font-size: 1.1rem;
+            margin: 30px 0 20px;
+            line-height: 1.5;
+        }
+        .countdown {
+            font-size: 1.8rem;
+            font-weight: 900;
+            font-family: 'Bangers', cursive;
+            color: #E02C1E;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 60px;
+            margin: 15px 0;
+        }
+        .compass {
+            font-size: 2rem;
+            margin: 15px 0;
+            animation: spinCompass 2s linear infinite;
+        }
+        @keyframes spinCompass {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .btn-manual {
+            display: inline-block;
+            background: linear-gradient(135deg, #E02C1E, #9A1F14);
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .btn-manual:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(224,44,30,0.6);
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.7rem;
+            color: #666;
+        }
+        .footer a {
+            color: #F5B041;
+            text-decoration: none;
+        }
+        /* Cigarette loader style smoke effect for fun */
+        .smoke {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(200,200,200,0.2);
+            border-radius: 50%;
+            filter: blur(8px);
+            animation: smokeDrift 4s infinite;
+            pointer-events: none;
+        }
+        @keyframes smokeDrift {
+            0% { transform: translateY(0) scale(1); opacity: 0.4; }
+            100% { transform: translateY(-80px) scale(3); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="jolly-roger"></div>
+        <h1>RAWKEY FLEET</h1>
+        <div class="sub">ONE PIECE GRAND LINE</div>
+        
+        <div class="message">
+            ⚓ Our ship is moving to a new port!<br>
+            You will be redirected to the new world in
+        </div>
+        
+        <div class="countdown" id="countdown">3</div>
+        <div class="compass">🏴‍☠️</div>
+        
+        <p style="font-size: 0.9rem; margin-top: 10px;">If the sea is rough, click the anchor below:</p>
+        <a href="https://rocketurl.uno/index.html" class="btn-manual">⚓ SAIL MANUALLY ⚓</a>
+        
+        <div class="footer">
+            🏴‍☠️ Powered by <strong>RAWKEY</strong> | One Piece Engine
+        </div>
     </div>
-</div>
-
-<!-- Featured Highlights -->
-<section class="featured-section">
-    <h2 class="section-title">
-        <span class="title-icon">⭐</span> 
-        Featured Highlights
-    </h2>
-    <div class="featured-grid">
-        {% assign featured_posts = site.posts | where: "highlight", "true" %}
-        {% if featured_posts.size == 0 %}
-            <p class="no-posts">No featured articles yet. Check back soon!</p>
-        {% else %}
-            {% for post in featured_posts limit:4 %}
-            <article class="featured-card">
-                <div class="featured-badge">🔥 Featured</div>
-                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                <div class="post-meta">
-                    <span>📅 {{ post.date | date: "%B %d, %Y" }}</span>
-                    <span>📁 {{ post.categories | join: ", " }}</span>
-                </div>
-                <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
-                <a href="{{ post.url }}" class="read-more">Read Full Story →</a>
-            </article>
-            {% endfor %}
-        {% endif %}
-    </div>
-</section>
-
-<!-- Latest Articles -->
-<section class="latest-section">
-    <h2 class="section-title">
-        <span class="title-icon">📰</span> 
-        Latest Articles
-    </h2>
-    <div class="articles-list">
-        {% assign all_posts = site.posts %}
-        {% if all_posts.size == 0 %}
-            <p class="no-posts">No articles yet. Use the admin panel to create your first article!</p>
-        {% else %}
-            {% for post in all_posts %}
-            <article class="article-item">
-                <div class="article-content">
-                    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                    <div class="post-meta">
-                        <span>📅 {{ post.date | date: "%B %d, %Y" }}</span>
-                        <span>🕐 {{ post.date | date: "%I:%M %p" }}</span>
-                    </div>
-                    <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
-                    <div class="article-footer">
-                        <a href="{{ post.url }}" class="read-more">Continue Reading →</a>
-                        <span class="read-time">⏱️ {{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
-                    </div>
-                </div>
-            </article>
-            {% endfor %}
-        {% endif %}
-    </div>
-</section>
-
-<!-- Newsletter -->
-<div class="newsletter">
-    <h3>📧 Stay Updated</h3>
-    <p>Get new articles delivered to your inbox</p>
-    <form class="newsletter-form">
-        <input type="email" placeholder="Your email address" required>
-        <button type="submit">Subscribe →</button>
-    </form>
-    <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
-</div>
+    <div class="smoke"></div>
+    
+    <script>
+        let seconds = 3;
+        const countdownEl = document.getElementById('countdown');
+        const interval = setInterval(() => {
+            seconds--;
+            if (seconds >= 0) {
+                countdownEl.textContent = seconds;
+            }
+            if (seconds < 0) {
+                clearInterval(interval);
+                window.location.href = "https://rocketurl.uno/index.html";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
