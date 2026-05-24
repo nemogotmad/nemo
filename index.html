@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=https://rocketurl.uno">
-    <title>RAWKEY FLEET | Redirecting...</title>
+    <title>RAWKEY FLEET | Add Funds</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Bangers&display=swap" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -14,16 +15,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            text-align: center;
+            padding: 20px;
         }
         .card {
-            background: rgba(14, 16, 26, 0.85);
+            background: rgba(14,16,26,0.9);
             backdrop-filter: blur(10px);
             border-radius: 32px;
             border-top: 4px solid #E02C1E;
             padding: 2rem;
             max-width: 450px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
         }
         h1 {
             font-family: 'Bangers', cursive;
@@ -33,28 +36,136 @@
             background-clip: text;
             color: transparent;
         }
-        .jolly {
-            font-size: 4rem;
-            margin: 20px 0;
+        .sub { color: #F5B041; font-size: 0.8rem; margin-bottom: 20px; }
+        input {
+            width: 100%;
+            background: #0a0c14;
+            border: 1px solid #2a2e3e;
+            padding: 14px;
+            border-radius: 14px;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 15px 0;
         }
-        .footer {
-            margin-top: 20px;
-            font-size: 0.7rem;
-            color: #666;
+        input:focus { border-color: #E02C1E; outline: none; }
+        button {
+            background: linear-gradient(135deg, #E02C1E, #9A1F14);
+            color: white;
+            font-weight: 800;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        a { color: #F5B041; text-decoration: none; }
+        button:hover { filter: brightness(1.05); transform: scale(0.98); }
+        .status { margin-top: 15px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="jolly">🏴‍☠️</div>
-        <h1>RAWKEY FLEET</h1>
-        <p>Setting sail to the Grand Line...</p>
-        <p style="margin-top: 15px; font-size: 0.8rem;">If not redirected, <a href="https://rocketurl.uno">click here</a>.</p>
-        <div class="footer">⚓ One Piece Engine | Powered by RAWKEY</div>
-    </div>
-    <script>
-        window.location.href = "https://rocketurl.uno";
-    </script>
+<div class="card">
+    <h1>RAWKEY FLEET</h1>
+    <div class="sub">Add Belly to Your Wallet</div>
+    <input type="number" id="amount" placeholder="Enter amount (₹)" min="10" step="1">
+    <button id="payBtn">⚓ ADD FUNDS ⚓</button>
+    <div id="status" class="status"></div>
+</div>
+
+<script>
+    const API_BASE = 'https://rocketurl.uno/api.php'; // Your VPS API endpoint
+
+    document.getElementById('payBtn').addEventListener('click', async () => {
+        const amount = parseInt(document.getElementById('amount').value);
+        if (!amount || amount < 10) {
+            showStatus("Enter a valid amount (min ₹10)", "error");
+            return;
+        }
+
+        const btn = document.getElementById('payBtn');
+        btn.disabled = true;
+        btn.innerText = "PROCESSING...";
+
+        try {
+            // Step 1: Create order on VPS
+            const orderRes = await fetch(API_BASE, {
+                method: 'POST',
+                mode: 'cors',          // Required for cross-origin
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    action: 'create_razorpay_order',
+                    amount: amount
+                })
+            });
+            const orderData = await orderRes.json();
+
+            if (orderData.status !== 'success') {
+                showStatus(orderData.message, "error");
+                btn.disabled = false;
+                btn.innerText = "ADD FUNDS";
+                return;
+            }
+
+            // Step 2: Razorpay checkout
+            const options = {
+                key: orderData.key_id,
+                amount: orderData.amount,
+                currency: orderData.currency,
+                name: "RAWKEY FLEET",
+                description: "Add funds to wallet",
+                order_id: orderData.order_id,
+                handler: async function(response) {
+                    // Verify payment on VPS
+                    const verifyRes = await fetch(API_BASE, {
+                        method: 'POST',
+                        mode: 'cors',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams({
+                            action: 'verify_razorpay_payment',
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_signature: response.razorpay_signature
+                        })
+                    });
+                    const verifyData = await verifyRes.json();
+                    if (verifyData.status === 'success') {
+                        showStatus(`✅ ₹${amount} added! Thank you.`, "success");
+                        document.getElementById('amount').value = '';
+                        // Optional: redirect after 2 seconds
+                        setTimeout(() => {
+                            window.location.href = 'https://nemogotmad.github.io/nemo/';
+                        }, 2000);
+                    } else {
+                        showStatus("Payment verification failed.", "error");
+                    }
+                    btn.disabled = false;
+                    btn.innerText = "ADD FUNDS";
+                },
+                theme: { color: "#E02C1E" }
+            };
+            const rzp = new Razorpay(options);
+            rzp.open();
+            rzp.on('payment.failed', (resp) => {
+                showStatus("Payment failed: " + resp.error.description, "error");
+                btn.disabled = false;
+                btn.innerText = "ADD FUNDS";
+            });
+
+        } catch (err) {
+            showStatus("Network error. Check console.", "error");
+            btn.disabled = false;
+            btn.innerText = "ADD FUNDS";
+        }
+    });
+
+    function showStatus(msg, type) {
+        const el = document.getElementById('status');
+        el.innerHTML = msg;
+        el.style.color = type === 'success' ? '#4ade80' : '#f87171';
+        setTimeout(() => { el.innerHTML = ''; }, 5000);
+    }
+</script>
 </body>
 </html>
