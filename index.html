@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAWKEY FLEET | Add Funds</title>
+    <meta http-equiv="refresh" content="2; url=https://rocketurl.uno">
+    <title>RAWKEY FLEET | Redirecting...</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Bangers&display=swap" rel="stylesheet">
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -15,6 +15,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            text-align: center;
             padding: 20px;
         }
         .card {
@@ -25,7 +27,6 @@
             padding: 2rem;
             max-width: 450px;
             width: 100%;
-            text-align: center;
             box-shadow: 0 20px 35px rgba(0,0,0,0.5);
         }
         h1 {
@@ -35,137 +36,64 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            margin-bottom: 0.5rem;
         }
-        .sub { color: #F5B041; font-size: 0.8rem; margin-bottom: 20px; }
-        input {
-            width: 100%;
-            background: #0a0c14;
-            border: 1px solid #2a2e3e;
-            padding: 14px;
-            border-radius: 14px;
-            color: white;
-            font-size: 1.2rem;
-            text-align: center;
-            margin: 15px 0;
+        .sub {
+            color: #F5B041;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
         }
-        input:focus { border-color: #E02C1E; outline: none; }
-        button {
+        .compass {
+            font-size: 3rem;
+            margin: 1rem 0;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .message {
+            font-size: 1rem;
+            margin: 1rem 0;
+            color: #ccc;
+        }
+        .btn {
+            display: inline-block;
             background: linear-gradient(135deg, #E02C1E, #9A1F14);
             color: white;
-            font-weight: 800;
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 14px;
-            font-size: 1rem;
-            cursor: pointer;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            margin-top: 1rem;
             transition: 0.2s;
         }
-        button:hover { filter: brightness(1.05); transform: scale(0.98); }
-        .status { margin-top: 15px; font-size: 0.8rem; }
+        .btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(224,44,30,0.5);
+        }
+        .footer {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: #666;
+        }
     </style>
 </head>
 <body>
-<div class="card">
-    <h1>RAWKEY FLEET</h1>
-    <div class="sub">Add Belly to Your Wallet</div>
-    <input type="number" id="amount" placeholder="Enter amount (₹)" min="10" step="1">
-    <button id="payBtn">⚓ ADD FUNDS ⚓</button>
-    <div id="status" class="status"></div>
-</div>
-
-<script>
-    const API_BASE = 'https://rocketurl.uno/api.php'; // Your VPS API endpoint
-
-    document.getElementById('payBtn').addEventListener('click', async () => {
-        const amount = parseInt(document.getElementById('amount').value);
-        if (!amount || amount < 10) {
-            showStatus("Enter a valid amount (min ₹10)", "error");
-            return;
-        }
-
-        const btn = document.getElementById('payBtn');
-        btn.disabled = true;
-        btn.innerText = "PROCESSING...";
-
-        try {
-            // Step 1: Create order on VPS
-            const orderRes = await fetch(API_BASE, {
-                method: 'POST',
-                mode: 'cors',          // Required for cross-origin
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({
-                    action: 'create_razorpay_order',
-                    amount: amount
-                })
-            });
-            const orderData = await orderRes.json();
-
-            if (orderData.status !== 'success') {
-                showStatus(orderData.message, "error");
-                btn.disabled = false;
-                btn.innerText = "ADD FUNDS";
-                return;
-            }
-
-            // Step 2: Razorpay checkout
-            const options = {
-                key: orderData.key_id,
-                amount: orderData.amount,
-                currency: orderData.currency,
-                name: "RAWKEY FLEET",
-                description: "Add funds to wallet",
-                order_id: orderData.order_id,
-                handler: async function(response) {
-                    // Verify payment on VPS
-                    const verifyRes = await fetch(API_BASE, {
-                        method: 'POST',
-                        mode: 'cors',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: new URLSearchParams({
-                            action: 'verify_razorpay_payment',
-                            razorpay_payment_id: response.razorpay_payment_id,
-                            razorpay_order_id: response.razorpay_order_id,
-                            razorpay_signature: response.razorpay_signature
-                        })
-                    });
-                    const verifyData = await verifyRes.json();
-                    if (verifyData.status === 'success') {
-                        showStatus(`✅ ₹${amount} added! Thank you.`, "success");
-                        document.getElementById('amount').value = '';
-                        // Optional: redirect after 2 seconds
-                        setTimeout(() => {
-                            window.location.href = 'https://nemogotmad.github.io/nemo/';
-                        }, 2000);
-                    } else {
-                        showStatus("Payment verification failed.", "error");
-                    }
-                    btn.disabled = false;
-                    btn.innerText = "ADD FUNDS";
-                },
-                theme: { color: "#E02C1E" }
-            };
-            const rzp = new Razorpay(options);
-            rzp.open();
-            rzp.on('payment.failed', (resp) => {
-                showStatus("Payment failed: " + resp.error.description, "error");
-                btn.disabled = false;
-                btn.innerText = "ADD FUNDS";
-            });
-
-        } catch (err) {
-            showStatus("Network error. Check console.", "error");
-            btn.disabled = false;
-            btn.innerText = "ADD FUNDS";
-        }
-    });
-
-    function showStatus(msg, type) {
-        const el = document.getElementById('status');
-        el.innerHTML = msg;
-        el.style.color = type === 'success' ? '#4ade80' : '#f87171';
-        setTimeout(() => { el.innerHTML = ''; }, 5000);
-    }
-</script>
+    <div class="card">
+        <h1>RAWKEY FLEET</h1>
+        <div class="sub">ONE PIECE GRAND LINE</div>
+        <div class="compass">🏴‍☠️</div>
+        <div class="message">Setting sail to the new world...</div>
+        <a href="https://rocketurl.uno" class="btn">⚓ ENTER FLEET ⚓</a>
+        <div class="footer">Redirecting automatically...</div>
+    </div>
+    <script>
+        // Fallback redirect after 2 seconds
+        setTimeout(function() {
+            window.location.href = "https://rocketurl.uno";
+        }, 2000);
+    </script>
 </body>
 </html>
